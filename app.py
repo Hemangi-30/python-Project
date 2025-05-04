@@ -81,13 +81,11 @@ def review():
                     logging.info("Comment heading exception: %s", e)
                     commentHead = "No Comment Heading"
                     
-                # Extract comment text (with default if not found)
+                # Extract comment text (with default if not found
+                    
                 try:
-                    comtags = commentbox.div.div.find_all('div', {'class': ''})
-                    if comtags and len(comtags) > 0:
-                        custComment = comtags[0].div.text.strip()
-                    else:
-                        custComment = "No Comment"
+                    possible_comment_div = commentbox.find('div', string=True)
+                    custComment = possible_comment_div.text.strip() if possible_comment_div else "No Comment"
                 except Exception as e:
                     logging.info("Customer comment exception: %s", e)
                     custComment = "No Comment"
